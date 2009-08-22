@@ -20,6 +20,8 @@ abstract class TestCredentialKeyStore {
 			KeyStore ks = KeyStore.getInstance("PKCS12");
 			char[] pass = new char[]{'p', 'a', 's', 's'};
 			InputStream is = TestCredentialKeyStore.class.getResourceAsStream("ssl_test.p12");
+			if (is == null)
+				throw new CryptoException("could not access credential resource");
 			ks.load(is, pass);
 			return ks;
 		} catch (IOException e) {
